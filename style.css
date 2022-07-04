@@ -10,3 +10,8 @@
     width: auto;
     border: 1px solid black;
 }
+
+.ButtonClicked {
+    color: grey;
+    background-color: rgb(99, 99, 160);
+}

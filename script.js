@@ -4,9 +4,16 @@ let mouseDown = false
 document.body.onmousedown = () => (mouseDown = true)
 document.body.onmouseup = () => (mouseDown = false)
 
+function randGen() {
+    let random = Math.floor(Math.random() * 255);
+    return random
+}
+
 function colorGrid(e) {
     if (e.type === 'mouseover' && !mouseDown) return
-    this.style.backgroundColor = 'black'
+    if (!rainbowMode) {
+        this.style.backgroundColor = 'black'
+    } else this.style.backgroundColor = `rgb(${randGen()}, ${randGen()}, ${randGen()})`
 }
 
 function makeGrid(input) {
@@ -35,6 +42,13 @@ function inputGrid() {
         alert("Woah there, buddy! Choose a smaller number!")
     }
     else makeGrid(input)
+}
+
+rainbowMode = false
+function rainbowMode() {
+    if (rainbow == false) {
+        return rainbowMode = true
+    } else return rainbowMode = false
 }
 
 makeGrid(10)
