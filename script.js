@@ -1,10 +1,16 @@
 
 const currentDiv = document.getElementById('container');
-const newDiv = document.getElementsByClassName('gridcell');
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true)
+document.body.onmouseup = () => (mouseDown = false)
 
-const submit = document.getElementById('submitButton');
+function colorGrid(e) {
+    if (e.type === 'mouseover' && !mouseDown) return
+    this.style.backgroundColor = 'black'
+}
 
 function makeGrid(input) {
+    const newDiv = document.getElementsByClassName('gridcell');
     currentDiv.innerHTML = ''
     for (rows = 0; rows < input; rows++) {
         for (columns = 0; columns < input; columns++) {
@@ -15,7 +21,13 @@ function makeGrid(input) {
     }
     currentDiv.style.gridTemplateRows = `repeat(${input}, 1fr)`;
     currentDiv.style.gridTemplateColumns = `repeat(${input}, 1fr)`;
+
+    let newDivs = currentDiv.querySelectorAll('div')
+    newDivs.forEach(newDiv => newDiv.addEventListener('mousedown', colorGrid));
+    newDivs.forEach(newDiv => newDiv.addEventListener('mouseover', colorGrid));
 };
+
+
 
 function inputGrid() {
     let input = prompt("Enter grid size: ")
@@ -25,3 +37,4 @@ function inputGrid() {
     else makeGrid(input)
 }
 
+makeGrid(10)
